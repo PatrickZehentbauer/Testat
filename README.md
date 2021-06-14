@@ -8,7 +8,7 @@ Die Aufgabenstellung ist: Umsetzung eines kleinen Softwareprojektes mit HTML+CSS
 Aufbau des Testats:
 
 - Testat14.06.php - Die Hauptdatei, kümmert sich um die Erstellung der Umfrage und die Auswertung
-- Testat2.css (in bearbeitung) - Eine CSS Datei, um die Umfrage schöner dar zu stellen
+- Testat2.css - Eine CSS Datei, um die Umfrage schöner dar zu stellen
 - Testat_Pseudodaten.csv - Pseudodaten zum Testen, Format: "ID;Vorname;Nachname;Frage1;Frage2;Frage3;Frage4"
 
 Zum Speichern (/Laden) von Einträgen muss Testat_Pseudodaten.csv ausgewählt werden 
