@@ -8,12 +8,12 @@
 </head>
 
 <body>
+    <h3>Fragebogen</h3>
     <label>Nachname</label><Input>
     <label>Vorname</label><Input>
-    <h3>Fragebogen</h3>
+    <br>
+    <br>
     <?php
-
-    use function PHPSTORM_META\type;
 
     $fragen = array(
         "0" => "Who let the dogs out?",
@@ -149,9 +149,6 @@
                 let button = document.getElementById("Auswertung")
                 button.setAttribute("style", "visibility : display")
             }
-            //muss dann noch ins if rein
-            saveFile();
-            event.stopPropagation();
 
         }
 
@@ -182,14 +179,11 @@
             }
         }
 
-        var f1 = [10, 20, 30, 40];
-        var f2 = [40, 30, 20, 10];
-        var f3 = [0, 10, 50, 20];
-        var f0 = [100, 20, 30, 10];
-
-        var werte = [f1, f2, f3, f0];
+        var werte = get_statistics( readTextFile("Testat_Pseudodaten.csv" ) );
+        var anzahl = 0;
 
         function showResults() {
+            anzahl = werte[ 0 ][ 0 ] + werte[ 0 ][ 1 ] + werte[ 0 ][ 2 ] + werte[ 0 ][ 3 ]
             if (!shown) {
                 div.forEach(appendResults)
             }
@@ -200,6 +194,7 @@
             let result = document.createElement("progress")
             result.setAttribute("max", 100);
             let value = werte[Math.floor(index / 4)][index % 4]
+            value = 100* (value / anzahl )
             result.setAttribute("value", value);
 
             item.appendChild(result);
@@ -228,28 +223,28 @@
             var lines = text.split("\r\n");
             var line_split = [];
             var frage_1 = {
-                "A": 0,
-                "B": 0,
-                "C": 0,
-                "D": 0
+                0: 0,
+                1: 0,
+                2: 0,
+                3: 0
             }
             var frage_2 = {
-                "A": 0,
-                "B": 0,
-                "C": 0,
-                "D": 0
+                0: 0,
+                1: 0,
+                2: 0,
+                3: 0
             }
             var frage_3 = {
-                "A": 0,
-                "B": 0,
-                "C": 0,
-                "D": 0
+                0: 0,
+                1: 0,
+                2: 0,
+                3: 0
             }
             var frage_4 = {
-                "A": 0,
-                "B": 0,
-                "C": 0,
-                "D": 0
+                0: 0,
+                1: 0,
+                2: 0,
+                3: 0
             }
             var fragen = [frage_1, frage_2, frage_3, frage_4];
 
@@ -259,21 +254,21 @@
             }
 
             for (let i = 1; i < line_split.length; i++) {
-                console.log(line_split[i][3]);
+                //console.log(line_split[i][3]);
                 var curr_frage = 0;
                 for (let j = 3; j < line_split.length; j++) {
                     switch (line_split[i][j]) {
                         case "A":
-                            fragen[curr_frage]["A"] += 1;
+                            fragen[curr_frage][0] += 1;
                             break;
                         case "B":
-                            fragen[curr_frage]["B"] += 1;
+                            fragen[curr_frage][1] += 1;
                             break;
                         case "C":
-                            fragen[curr_frage]["C"] += 1;
+                            fragen[curr_frage][2] += 1;
                             break;
                         case "D":
-                            fragen[curr_frage]["D"] += 1;
+                            fragen[curr_frage][3] += 1;
                             break;
                         default:
                             break;
@@ -290,36 +285,50 @@
         }
 
         var stats = get_statistics(readTextFile("Testat_Pseudodaten.csv"));
-        //Das hier recherchieren hat viel zu lang gedauert, anscheinend geht das nur so, wie sie es in der Übung gezeigt haben
-        //wir haben versucht cookies zu erstellen mit javascript und dann über php diese auszulesen und in die Datei zu schreiben, aber ohne Erfolg...
+        let button = document.getElementById("save");
+        button.addEventListener('click', () => {
+            saveFile();
+            event.stopPropagation();
+        })
 
-        
         async function saveFile() {
-            let str = readTextFile("Testat_Pseudodaten.csv");
-            alert(str);
+            const opts = {
+                types: [{
+                    description: 'Text file',
+                    accept: {
+                        'text/plain': ['.txt']
+                    },
+                }],
+            };
             await window.showSaveFilePicker()
-            .then(fileHandle => fileHandle.createWritable())
-            .then(stream => {
-                 stream.write(str + "\n" + "was geht hier ab?")
-                .catch(e => console.log(e)) 
-                return stream
-            })
-            .then(stream => stream.close())
-            .catch(e => console.log(e))
-        }
-
-        function loadFile() {
-            window.showOpenFilePicker()
-                .then(fileHandle => fileHandle[0].getFile())
-                .then(file => file.text())
-                .then(text => {
-                    return text
+                .then(fileHandle => fileHandle.createWritable())
+                .then(stream => {
+                    stream.write(loadFile()+"jetzt aber")
+                        .catch(e => console.log(e))
+                    return stream
                 })
+                .then(stream => stream.close())
                 .catch(e => console.log(e))
         }
 
-        //Hier die Daten im richtigen Format angeben (als 1 Zeile)
         
+        function loadFile() {
+            window.showOpenFilePicker()
+            .then(fileHandle => fileHandle[0].getFile())
+            .then(file => file.text())
+            .then(text => {return text})
+            .catch(e => console.log(e))
+        }
+
+        //Hier die Daten im richtigen Format angeben (als 1 Zeile)
+        function readData() {
+            let str = Array()
+            fields.forEach((item, i) => {
+                str[i] = `${labels[i].innerHTML}:${item.value}`
+            })
+
+            return str.join("\n")
+        }
     </script>
 
 </body>
