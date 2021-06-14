@@ -1,43 +1,33 @@
-
 /* Überschrift */
+
 h3 {
     font-family: Rockwell, Georgia, "Times New Roman", Times, serif;
-    font-size: 40px; line-height: 0.5em;
+    font-size: 40px;
+    line-height: 0.5em;
     text-decoration: underline crimson;
     color: #5c82d9;
     margin: 20px;
     padding-left: 40px;
     padding-bottom: 30px;
-    text-shadow: 
-      rgba(0,0,0,0.5) -1px 0, 
-      rgba(0,0,0,0.3) 0 -1px, 
-      rgba(255,255,255,0.5) 2px 2px, 
-      rgba(0,0,0,0.3) -1px -2px;
-    
+    text-shadow: rgba(0, 0, 0, 0.5) -1px 0, rgba(0, 0, 0, 0.3) 0 -1px, rgba(255, 255, 255, 0.5) 2px 2px, rgba(0, 0, 0, 0.3) -1px -2px;
 }
 
+
 /* Fragen */
+
 label b {
     text-decoration: underline black;
     font-style: italic;
 }
 
-/* Antworten */
-span {
-}
-
-/* Checkboxen */
-input {
-
-}
-
-/* button */
-footer {
-}
 
 /* alles */
+
 body {
-    padding: 10%;
+    padding-top: 10%;
+    padding-bottom: 5%;
+    padding-right: 30%;
     background: url("right.png") no-repeat center;
+    background-size: 30% 95%;
     padding-left: 40%;
 }
