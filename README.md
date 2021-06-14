@@ -14,3 +14,5 @@ Testat.css (in bearbeitung) - Eine CSS Datei, um die Umfrage schöner dar zu ste
 Testat.csv (in bearbeitung) - Hier werden zukünftig die Daten für die Datenbank abgespeichert in diesem Format:
 <ID>;<Vorname>;<Nachname>;<Frage1>;<Frage2>;<Frage3>;<Frage4>
 Testat_Pseudodaten.csv - Pseudodaten zum testen
+
+Zum Speichern(/Laden) von Einträgen muss Testat_Pseudodaten.csv ausgewählt werden 
